@@ -15,14 +15,17 @@
     <meta name="keywords" content="ethan,Java,后端开发">
   
 
-  <meta property="og:type" content="article">
+  <meta name="description" content="1. 用户端服务流程用户没有账号的话应该先注册，填写员工姓名、编号、所属部门进行注册。如果已经有账号，或者注册完成之后，就输入用户名和密码进行登录。在登录之后，用户端展示工具列表，用户可以查看想要查看的工具，并且通过后台端来查询工具的信息，在工具信息详情页面，展示工具的基本信息，如编号，价格，数量和工具的位置等等。通过查看工具的位置，可以找到工具具体所在的工具柜，用户则可以进行工具的借用。借用工具">
+<meta property="og:type" content="article">
 <meta property="og:title" content="2019-7-8-网路协议">
 <meta property="og:url" content="http://yoursite.com/passages/2019-7-8-网路协议/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="1. 用户端服务流程用户没有账号的话应该先注册，填写员工姓名、编号、所属部门进行注册。如果已经有账号，或者注册完成之后，就输入用户名和密码进行登录。在登录之后，用户端展示工具列表，用户可以查看想要查看的工具，并且通过后台端来查询工具的信息，在工具信息详情页面，展示工具的基本信息，如编号，价格，数量和工具的位置等等。通过查看工具的位置，可以找到工具具体所在的工具柜，用户则可以进行工具的借用。借用工具">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-07-08T10:08:56.231Z">
+<meta property="og:updated_time" content="2019-07-08T14:15:45.732Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2019-7-8-网路协议">
+<meta name="twitter:description" content="1. 用户端服务流程用户没有账号的话应该先注册，填写员工姓名、编号、所属部门进行注册。如果已经有账号，或者注册完成之后，就输入用户名和密码进行登录。在登录之后，用户端展示工具列表，用户可以查看想要查看的工具，并且通过后台端来查询工具的信息，在工具信息详情页面，展示工具的基本信息，如编号，价格，数量和工具的位置等等。通过查看工具的位置，可以找到工具具体所在的工具柜，用户则可以进行工具的借用。借用工具">
 
   
 
@@ -93,14 +96,14 @@ ga('send', 'pageview');
 
 
   
-    <span id="toolbox-mobile" class="toolbox-mobile">盒子</span>
+    <span id="toolbox-mobile" class="toolbox-mobile">导航</span>
   
 
   <div class="post-header CENTER">
    
   <div class="toolbox">
     <a class="toolbox-entry" href="/">
-      <span class="toolbox-entry-text">盒子</span>
+      <span class="toolbox-entry-text">导航</span>
       <i class="icon-angle-down"></i>
       <i class="icon-home"></i>
     </a>
@@ -142,17 +145,6 @@ ga('send', 'pageview');
         <li class="item-toolbox">
           <a
             class="CIRCLE"
-            href="/link/"
-            rel="noopener noreferrer"
-            target="_self"
-            >
-            友链
-          </a>
-        </li>
-      
-        <li class="item-toolbox">
-          <a
-            class="CIRCLE"
             href="/about/"
             rel="noopener noreferrer"
             target="_self"
@@ -178,6 +170,11 @@ ga('send', 'pageview');
 
 </div>
 
+
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-用户端服务流程"><span class="toc-text">1. 用户端服务流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-管理员端服务流程"><span class="toc-text">2. 管理员端服务流程</span></a></li></ol>
+  </div>
 
 
 
@@ -217,7 +214,9 @@ ga('send', 'pageview');
 
   <div class="article-content">
     
-      
+      <h3 id="1-用户端服务流程"><a href="#1-用户端服务流程" class="headerlink" title="1. 用户端服务流程"></a>1. 用户端服务流程</h3><p>用户没有账号的话应该先注册，填写员工姓名、编号、所属部门进行注册。如果已经有账号，或者注册完成之后，就输入用户名和密码进行登录。在登录之后，用户端展示工具列表，用户可以查看想要查看的工具，并且通过后台端来查询工具的信息，在工具信息详情页面，展示工具的基本信息，如编号，价格，数量和工具的位置等等。通过查看工具的位置，可以找到工具具体所在的工具柜，用户则可以进行工具的借用。借用工具时，后台端判断用户是否可以借用工具，判断的因素有工具是否损坏、工具数量和用户是否有借用权限。如果不满足借用的条件，则用户无法进行工具的借用，如果满足借用的条件，则可以进行工具的借用。借用时，在后台端生成工具借用的记录，记录包括借用者、借用时间、归还时间、借用数量、借用工具编号等基本信息。在借用完成后，用户就可以取走工具。在即将到归还时间时，会提醒用户进行工具的归还。</p>
+<h3 id="2-管理员端服务流程"><a href="#2-管理员端服务流程" class="headerlink" title="2. 管理员端服务流程"></a>2. 管理员端服务流程</h3><p>管理员由公司分配账号，管理员拿到账号，通过输入账号和密码进行登录。在登录之后，管理员端展示工具列表，管理员可以查看想要查看的工具，并且通过后台端来查询工具的信息，管理员可以对想要修改的工具信息进行修改，可以修改工具的价格，数量，工具的位置等等。如果是修改数量，管理员应该向相应的工具柜补充相应的数量，如果修改工具的位置，则管理员应该把工具转移到相应的工具柜。在确认修改后，修改的工具信息存入数据库，用户端所看到的工具信息也将会同步。</p>
+
     
   </div>
 
@@ -225,32 +224,6 @@ ga('send', 'pageview');
 
 
    
-  <div class="text-center donation">
-    <div class="inner-donation">
-      <span class="btn-donation">支持一下</span>
-      <div class="donation-body">
-        <div class="tip text-center">扫一扫，支持forsigner</div>
-        <ul>
-        
-          <li class="item">
-            
-              <span>微信扫一扫</span>
-            
-            <img src="/images/qr-wechat.png" alt="">
-          </li>
-        
-          <li class="item">
-            
-              <span>支付宝扫一扫</span>
-            
-            <img src="/images/qr-alipay.png" alt="">
-          </li>
-        
-        </ul>
-      </div>
-    </div>
-  </div>
-
 
    
   <div class="box-prev-next clearfix">
@@ -315,17 +288,6 @@ ga('send', 'pageview');
               target="_self"
               >
               标签
-            </a>
-          </li>
-        
-          <li class="item-toolbox">
-            <a
-              class="CIRCLE"
-              href="/link/"
-              rel="noopener noreferrer"
-              target="_self"
-              >
-              友链
             </a>
           </li>
         
