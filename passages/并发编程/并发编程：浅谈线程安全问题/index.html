@@ -15,15 +15,21 @@
     <meta name="keywords" content="java,并发编程,">
   
 
-  <meta name="keywords" content="java,并发编程">
+  <meta name="description" content="一、一个简单的例子通过实现Runnable的接口的方式实现线程，在实现类中添加一个成员变量 i，在run方法中通过对i的判断跳出循环结束线程，在main方法中定义两个线程对象同时来操作这个Runnable对象 123456789101112131415161718192021222324252627282930//线程类class MyThread implements Runnable&amp;#123">
+<meta name="keywords" content="java,并发编程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="并发编程：浅谈线程安全问题">
 <meta property="og:url" content="http://yoursite.com/passages/并发编程/并发编程：浅谈线程安全问题/index.html">
 <meta property="og:site_name" content="Ethan&#39;s blog">
+<meta property="og:description" content="一、一个简单的例子通过实现Runnable的接口的方式实现线程，在实现类中添加一个成员变量 i，在run方法中通过对i的判断跳出循环结束线程，在main方法中定义两个线程对象同时来操作这个Runnable对象 123456789101112131415161718192021222324252627282930//线程类class MyThread implements Runnable&amp;#123">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-07-17T14:47:12.501Z">
+<meta property="og:image" content="https://github.com/Ethansbox/Ethansbox.github.io/blob/master/images/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%EF%BC%9A%E6%B5%85%E8%B0%88%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E9%97%AE%E9%A2%98-01.png?raw=true">
+<meta property="og:image" content="c:%5CUsers%5CAdministrator%5Cblog%5Cpublic%5Cimages%5C%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%5C%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%EF%BC%9A%E6%B5%85%E8%B0%88%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E9%97%AE%E9%A2%98-02.png">
+<meta property="og:updated_time" content="2019-07-17T16:10:15.088Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="并发编程：浅谈线程安全问题">
+<meta name="twitter:description" content="一、一个简单的例子通过实现Runnable的接口的方式实现线程，在实现类中添加一个成员变量 i，在run方法中通过对i的判断跳出循环结束线程，在main方法中定义两个线程对象同时来操作这个Runnable对象 123456789101112131415161718192021222324252627282930//线程类class MyThread implements Runnable&amp;#123">
+<meta name="twitter:image" content="https://github.com/Ethansbox/Ethansbox.github.io/blob/master/images/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%EF%BC%9A%E6%B5%85%E8%B0%88%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E9%97%AE%E9%A2%98-01.png?raw=true">
 
   
 
@@ -169,6 +175,11 @@ ga('send', 'pageview');
 </div>
 
 
+  <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、一个简单的例子"><span class="toc-text">一、一个简单的例子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一个简单"><span class="toc-text">一个简单</span></a></li></ol>
+  </div>
+
 
 
 <div class="content content-post CENTER">
@@ -212,7 +223,18 @@ ga('send', 'pageview');
 
   <div class="article-content">
     
-      
+      <h2 id="一、一个简单的例子"><a href="#一、一个简单的例子" class="headerlink" title="一、一个简单的例子"></a>一、一个简单的例子</h2><p>通过实现Runnable的接口的方式实现线程，在实现类中添加一个成员变量 i，在run方法中通过对i的判断跳出循环结束线程，在main方法中定义两个线程对象同时来操作这个Runnable对象</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//线程类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyThread</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>)&#123;</span><br><span class="line">            System.out.println(<span class="string">"number : "</span> + i++);</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                Thread.sleep(<span class="number">100</span>);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (<span class="number">50</span> == i) <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//测试</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyThreadTest</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        MyThread myThread = <span class="keyword">new</span> MyThread();</span><br><span class="line">        Thread thread1 = <span class="keyword">new</span> Thread(myThread);</span><br><span class="line">        Thread thread2 = <span class="keyword">new</span> Thread(myThread);</span><br><span class="line">        thread1.start();</span><br><span class="line">        thread2.start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>部分执行结果：</p>
+<p><img src="https://github.com/Ethansbox/Ethansbox.github.io/blob/master/images/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%EF%BC%9A%E6%B5%85%E8%B0%88%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E9%97%AE%E9%A2%98-01.png?raw=true" alt="执行结果"></p>
+<p>可以看到，在输出的结果中，有的计数输出一次，有的输出两次，有的顺序是乱的，thread1和thread2是并行的，这两个线程运行时，操作的是同一个Runnable对象，而i又是成员变量，所以两个线程访问的是同一个 i 变量，在运行中，假设运行到 i=10 的时候，thread1线程拿到了这个 i=10 的值，同时thread2也拿到了 i=10 的值，然后thread1对i进行的自增操作，此时 i=11；thread2又将它拿到的 i=10 加一并且写回去，即又进行了一次 i=11的赋值，所以会出现这种错乱的结果。</p>
+<hr>
+<p>将 i 放到局部变量中，测试方法和上面一样：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyThread</span> <span class="keyword">implements</span> <span class="title">Runnable</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (<span class="keyword">true</span>)&#123;</span><br><span class="line">            System.out.println(<span class="string">"number : "</span> + i++);</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                Thread.sleep(<span class="number">100</span>);</span><br><span class="line">            &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span> (<span class="number">50</span> == i) <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="C:%5CUsers%5CAdministrator%5Cblog%5Cpublic%5Cimages%5C%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%5C%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%EF%BC%9A%E6%B5%85%E8%B0%88%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E9%97%AE%E9%A2%98-02.png" alt="执行结果"></p>
+<h2 id="一个简单"><a href="#一个简单" class="headerlink" title="一个简单"></a>一个简单</h2>
     
   </div>
 
