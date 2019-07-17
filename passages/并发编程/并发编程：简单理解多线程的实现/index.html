@@ -23,12 +23,12 @@
 <meta property="og:site_name" content="Ethan&#39;s blog">
 <meta property="og:description" content="实现线程的四种方式一、创建线程创建线程有如下四种方式  继承Thread类并重写run方法；  通过实现Runnable接口的类并且实现run方法；  实现Callable接口通过FutureTask包装器来创建Thread线程；  使用ExecutorService、Callable、Future实现有返回结果的多线程（使用ExecutorService来管理前三种方式）   本文介绍前两种方式">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="c:%5CUsers%5CAdministrator%5Cblog%5Cpublic%5Cimages%5C%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%5C%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%EF%BC%9A%E7%AE%80%E5%8D%95%E7%90%86%E8%A7%A3%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%AE%9E%E7%8E%B0-01.png">
-<meta property="og:updated_time" content="2019-07-17T14:15:03.738Z">
+<meta property="og:image" content="https://github.com/Ethansbox/Ethansbox.github.io/blob/master/images/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%EF%BC%9A%E7%AE%80%E5%8D%95%E7%90%86%E8%A7%A3%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%AE%9E%E7%8E%B0-01.png?raw=true">
+<meta property="og:updated_time" content="2019-07-17T14:22:56.212Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="并发编程：简单理解多线程的实现">
 <meta name="twitter:description" content="实现线程的四种方式一、创建线程创建线程有如下四种方式  继承Thread类并重写run方法；  通过实现Runnable接口的类并且实现run方法；  实现Callable接口通过FutureTask包装器来创建Thread线程；  使用ExecutorService、Callable、Future实现有返回结果的多线程（使用ExecutorService来管理前三种方式）   本文介绍前两种方式">
-<meta name="twitter:image" content="c:%5CUsers%5CAdministrator%5Cblog%5Cpublic%5Cimages%5C%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%5C%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%EF%BC%9A%E7%AE%80%E5%8D%95%E7%90%86%E8%A7%A3%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%AE%9E%E7%8E%B0-01.png">
+<meta name="twitter:image" content="https://github.com/Ethansbox/Ethansbox.github.io/blob/master/images/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%EF%BC%9A%E7%AE%80%E5%8D%95%E7%90%86%E8%A7%A3%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%AE%9E%E7%8E%B0-01.png?raw=true">
 
   
 
@@ -322,7 +322,7 @@ ga('send', 'pageview');
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isInterrupted</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> isInterrupted(<span class="keyword">false</span>);</span><br></pre></td></tr></table></figure>
 
 <p>可以看到，这个isInterrupted()方法还调用了另一个重载的方法，并且这个方法是private、native修饰的</p>
-<p><img src="C:%5CUsers%5CAdministrator%5Cblog%5Cpublic%5Cimages%5C%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%5C%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%EF%BC%9A%E7%AE%80%E5%8D%95%E7%90%86%E8%A7%A3%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%AE%9E%E7%8E%B0-01.png" alt="1563371094350"></p>
+<p><img src="https://github.com/Ethansbox/Ethansbox.github.io/blob/master/images/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%EF%BC%9A%E7%AE%80%E5%8D%95%E7%90%86%E8%A7%A3%E5%A4%9A%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%AE%9E%E7%8E%B0-01.png?raw=true" alt="isInterrupted"></p>
 <p>在注释中还提到，中断状态是否被清除，是由传入参数ClearInterrupted决定的，而interrupted()调用此方法时传入的是true，isInterrupted()调用此方法时传入的是false，这也与文档的描述相应证了。</p>
 </li>
 </ul>
