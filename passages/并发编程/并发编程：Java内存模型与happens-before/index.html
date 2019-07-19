@@ -7,7 +7,7 @@
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
-  <title>并发编程：Java内存模型与happen-before | Ethan&#39;s blog</title>
+  <title>并发编程：Java内存模型与happens-before | Ethan&#39;s blog</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -18,16 +18,16 @@
   <meta name="description" content="一、Java内存模型的抽象结构​        Java虚拟机规范中试图定义一种Java内存模型（Java Memory Model，JMM）来屏蔽掉各种硬件和操作系统的内存访问差异，以实现让Java程序在各种平台下都能达到一致的内存访问效果。在Java中，所有实例域、静态域和数组元素都存储在堆内存中，这些堆内存中的数据称之为共享变量，贡献变量在线程之间共享。而局部变量，方法定义参数和异常处理器参">
 <meta name="keywords" content="java,并发编程">
 <meta property="og:type" content="article">
-<meta property="og:title" content="并发编程：Java内存模型与happen-before">
-<meta property="og:url" content="http://yoursite.com/passages/并发编程/并发编程：Java内存模型与happen-before/index.html">
+<meta property="og:title" content="并发编程：Java内存模型与happens-before">
+<meta property="og:url" content="http://yoursite.com/passages/并发编程/并发编程：Java内存模型与happens-before/index.html">
 <meta property="og:site_name" content="Ethan&#39;s blog">
 <meta property="og:description" content="一、Java内存模型的抽象结构​        Java虚拟机规范中试图定义一种Java内存模型（Java Memory Model，JMM）来屏蔽掉各种硬件和操作系统的内存访问差异，以实现让Java程序在各种平台下都能达到一致的内存访问效果。在Java中，所有实例域、静态域和数组元素都存储在堆内存中，这些堆内存中的数据称之为共享变量，贡献变量在线程之间共享。而局部变量，方法定义参数和异常处理器参">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://github.com/Ethansbox/Ethansbox.github.io/blob/master/images/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%EF%BC%9A%E6%B5%85%E8%B0%88%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E9%97%AE%E9%A2%98-07.png?raw=true">
-<meta property="og:image" content="c:%5CUsers%5CAdministrator%5Cblog%5Cpublic%5Cimages%5C%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%5CJava%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8Ehappen-before-01.png">
-<meta property="og:updated_time" content="2019-07-19T10:55:49.637Z">
+<meta property="og:image" content="https://github.com/Ethansbox/Ethansbox.github.io/blob/master/images/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8Ehappen-before-01.png?raw=true">
+<meta property="og:updated_time" content="2019-07-19T12:48:48.534Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="并发编程：Java内存模型与happen-before">
+<meta name="twitter:title" content="并发编程：Java内存模型与happens-before">
 <meta name="twitter:description" content="一、Java内存模型的抽象结构​        Java虚拟机规范中试图定义一种Java内存模型（Java Memory Model，JMM）来屏蔽掉各种硬件和操作系统的内存访问差异，以实现让Java程序在各种平台下都能达到一致的内存访问效果。在Java中，所有实例域、静态域和数组元素都存储在堆内存中，这些堆内存中的数据称之为共享变量，贡献变量在线程之间共享。而局部变量，方法定义参数和异常处理器参">
 <meta name="twitter:image" content="https://github.com/Ethansbox/Ethansbox.github.io/blob/master/images/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%EF%BC%9A%E6%B5%85%E8%B0%88%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E9%97%AE%E9%A2%98-07.png?raw=true">
 
@@ -177,15 +177,15 @@ ga('send', 'pageview');
 
   <div id="toc" class="toc-article">
     <strong class="toc-title">文章目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、Java内存模型的抽象结构"><span class="toc-text">一、Java内存模型的抽象结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、重排序"><span class="toc-text">二、重排序</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1数据依赖性"><span class="toc-text">2.1数据依赖性</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、Java内存模型的抽象结构"><span class="toc-text">一、Java内存模型的抽象结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、重排序"><span class="toc-text">二、重排序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、happens-before"><span class="toc-text">三、happens-before</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、JMM的内存可见性保证"><span class="toc-text">四、JMM的内存可见性保证</span></a></li></ol>
   </div>
 
 
 
 <div class="content content-post CENTER">
-   <article id="post-并发编程/并发编程：Java内存模型与happen-before" class="article article-type-post" itemprop="blogPost">
+   <article id="post-并发编程/并发编程：Java内存模型与happens-before" class="article article-type-post" itemprop="blogPost">
   <header class="article-header">
-    <h1 class="post-title">并发编程：Java内存模型与happen-before</h1>
+    <h1 class="post-title">并发编程：Java内存模型与happens-before</h1>
 
     <div class="article-meta">
       <span>
@@ -230,10 +230,14 @@ ga('send', 'pageview');
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">boolean</span> flag = <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">processorA</span><span class="params">()</span></span>&#123;</span><br><span class="line">        a = <span class="number">1</span>;                  <span class="comment">//1</span></span><br><span class="line">        flag = <span class="keyword">true</span>;            <span class="comment">//2</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">processorB</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (flag)&#123;              <span class="comment">//3</span></span><br><span class="line">            <span class="keyword">int</span> i = a * a;      <span class="comment">//4</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>​        假设线程A执行processorA，线程B执行processorB，程序有可能不会按照我们的想法，先执行1，再执行2，有可能出现先执行2，然后3在判断时发现flag为true，则进入了if语句，而此时 a 没有被更新为 1 ，还是原来的0，执行4时i=0*0，最后会出现i=0的情况。</p>
-<p><img src="C:%5CUsers%5CAdministrator%5Cblog%5Cpublic%5Cimages%5C%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%5CJava%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8Ehappen-before-01.png" alt="重排序"></p>
+<p><img src="https://github.com/Ethansbox/Ethansbox.github.io/blob/master/images/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8Ehappen-before-01.png?raw=true" alt="重排序"></p>
 <p>​        上面这种情况可能存在，但实际中，这种情况发生的概率极低，只有当并发量非常大，程序过程很复杂的情况下会出现，严谨地说，线程A的指令执行顺序在线程B看来是没有保证的，顺序只能在线程A本身内部得到保证。</p>
 <p>​        指令会被重排序，但我们在单线程中，却总会感觉代码是顺序执行的，这是因为有以下保障。</p>
-<h3 id="2-1数据依赖性"><a href="#2-1数据依赖性" class="headerlink" title="2.1数据依赖性"></a>2.1数据依赖性</h3><p>如果两个操作访问同一个变量，且这两个操作中有一个为写操作，此时这两个操作之间就存在数据依赖性。</p>
+<ul>
+<li><p>数据依赖性</p>
+<p>如果两个操作访问同一个变量，且这两个操作中有一个为写操作，此时这两个操作之间就存在数据依赖性。</p>
+</li>
+</ul>
 <table>
 <thead>
 <tr>
@@ -258,6 +262,63 @@ ga('send', 'pageview');
 <td align="center">读一个变量之后，再写这个变量</td>
 </tr>
 </tbody></table>
+<p>​        以上三种情况，只要重排序两个操作的执行顺序，程序的执行结果就会被改变。</p>
+<p>​        编译器和处理器在重排序时，会遵守数据依赖性，编译器和处理器不会改变存在数据依赖关系的两个操作的执行顺序。但不同处理器之间和不同线程之间的数据依赖性不被编译器和处理器考虑。</p>
+<ul>
+<li><p>as-if-serial语义</p>
+<p>as-if-serial语义的意思是：不管怎么重排序，单线程程序的执行结果不能被改变。编译器、runtime和处理器都必须遵守as-if-serial语义。</p>
+</li>
+</ul>
+<h2 id="三、happens-before"><a href="#三、happens-before" class="headerlink" title="三、happens-before"></a>三、happens-before</h2><p>​        happens-before，也叫先行发生。在JMM中，如果一个操作执行的结果需要对另一个操作可见，那么这两个操作之间必须要存在happens-before关系。这两个操作既可以是在一个线程之内，也可以是在不同线程之间。下面是JMM一些“天然的”先行发生关系，无须任何同步器协助就已经存在。如果两个操作没有先行发生关系，则意味着虚拟机可以对它们随意地进行重排序。</p>
+<ul>
+<li>1、程序顺序规则（Program Order Rule）：一个线程中的每个操作，happens-before于该线程中的任意后续操作。（也就是as-if-serial）</li>
+<li>2、监视器锁规则（Monitor Lock Rule）：对一个锁的解锁，happens-before于随后对这个锁的加锁。</li>
+<li>3、volatile变量规则（Volatile Variable Rule）：对一个volatile域的写，happens-before于任意后续对这个volatile域的读。</li>
+<li>4、线程启动规则（Thread Start Rule）：如果线程A执行操作ThreadB.start()（启动线程B），那么A线程的ThreadB.start()操作happens-before于线程B中的任意操作。</li>
+<li>5、线程终止规则（Thread Termination Rule）：如果线程A执行操作ThreadB.join()并成功返回，那么线程B中的任意操作happens-before于线程A从ThreadB.join()操作成功返回。</li>
+<li>6、线程中断规则（Thread Interruption Rule）：对线程intererupt()方法的调用先行发生于被中断线程的代码检测到中断事件的发生。</li>
+<li>7、对象终结规则（Finalizer Rule）：一个对象的初始化完成（构造函数执行结束）先行发生于它的finalize()方法的开始。</li>
+<li>8、传递性：如果A happens-before B，B happens-before C，那么A happens-before C。</li>
+</ul>
+<p>​        两个操作之间具有happens-before关系，并不意味着前一个操作在时间点上必须要比后一个操作先执行。happens-before仅仅要求前一个操作（执行的结果）对后一个操作可见，且前一个操作按顺序排在第二个操作之前。</p>
+<p>​        比如在一个线程中定义两个不相关的变量：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> i =<span class="number">1</span>;</span><br><span class="line"><span class="keyword">int</span> j =<span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+
+<p>​        这两个操作在同一个线程中，符合happens-before的第一条规则，但并不意味着在时间点上”int i =1”会比”int j = 2”先执行，因为两者之间并不存在依赖关系，重排序并不会影响程序执行的结果，也就是说只要遵循 as-if-serial 即可。</p>
+<p>​        在设计者设计JMM时，需要考虑两个关键因素。</p>
+<ul>
+<li>程序员希望内存模型易于理解、易于编程。程序员希望基于一个强内存模型来编写代码。</li>
+<li>编译器和处理器对内存模型的实现。编译器和处理器希望内存模型对它们的束缚越少越好，这样它们可以做尽可能多的优化来提高性能。编译器和处理器希望实现一个弱内存模型。</li>
+</ul>
+<p>由于这两个因素相互矛盾，所以JSR-133专家组在设计JMM时的核心目标就是找到一个好的平衡点：一方面，要为程序员提供足够强的内存可见性保证；另一方面，对编译器和处理器的限制要尽可能地放松。下面来看JSR-133是如何实现这一目标的。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">double</span> pi = <span class="number">3.14</span>;				<span class="comment">//A</span></span><br><span class="line"><span class="keyword">double</span> r  = <span class="number">1.0</span>;				<span class="comment">//B</span></span><br><span class="line"><span class="keyword">double</span> area = pi * r * r;		<span class="comment">//C</span></span><br></pre></td></tr></table></figure>
+
+<p>上面计算圆的面积的示例代码存在3个happens-before关系：</p>
+<ul>
+<li><p>A happens-before B.</p>
+</li>
+<li><p>B happens-before C.</p>
+</li>
+<li><p>A happens-before C.</p>
+</li>
+</ul>
+<p>在3个happens-before关系中，2和3是必须的，但1是不必要的。因此，JMM把happens-before要求禁止的重排序分为了下面两类。</p>
+<ul>
+<li>会改变程序执行结果的重排序</li>
+<li>不会改变程序执行结果的重排序</li>
+</ul>
+<p>JMM对这两种不同性质的重排序，采取了不同的策略：</p>
+<ul>
+<li>对于会改变程序执行结果的重排序，JMM要求编译器和处理器必须禁止这种重排序。</li>
+<li>对于不会改变程序执行结果的重排序，JMM对编译器和处理器不做要求。（JMM允许这种重排序）。</li>
+</ul>
+<p>happens-before关系本质上和as-if-serial语义是一回事。as-if-serial语义保证单线程内程序的执行结果不被改变，happens-before关系保证正确同步的多线程程序的执行结果不被改变。as-if-serial语义让程序员感觉单线程程序是按程序顺序来执行的。happens-before关系则让程序员感觉正确同步的多线程程序是按happens-before指定的顺序来执行的。</p>
+<h2 id="四、JMM的内存可见性保证"><a href="#四、JMM的内存可见性保证" class="headerlink" title="四、JMM的内存可见性保证"></a>四、JMM的内存可见性保证</h2><p>按程序类型，Java程序的内存可见性保证可以分为下列3类。</p>
+<ul>
+<li>单线程程序。单线程程序不会出现内存可见性问题。编译器、runtime和处理器会共同确保单线程程序的执行结果与程序顺序执行的结果相同。</li>
+<li>正确同步的多线程程序。正确同步的多线程程序的执行将具有顺序一致性（程序的执行结果与该程序在顺序一致性内存模型中的执行结果相同）。这是JMM关注的重点，JMM通过限制编译器和处理器的重排序来为程序员提供内存可见性保证。</li>
+<li>未同步/未正确同步的多线程程序。JMM为它们提供了最小安全性保障：线程执行时读取到的值，要么是之前某个线程写入的值，要么是默认值（0、null、false）。而不会出现初始化到一半的值。</li>
+</ul>
 
     
   </div>
