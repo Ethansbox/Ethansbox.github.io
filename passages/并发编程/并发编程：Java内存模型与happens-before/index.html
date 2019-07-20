@@ -25,7 +25,7 @@
 <meta property="og:locale" content="default">
 <meta property="og:image" content="https://github.com/Ethansbox/Ethansbox.github.io/blob/master/images/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%EF%BC%9A%E6%B5%85%E8%B0%88%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8%E9%97%AE%E9%A2%98-07.png?raw=true">
 <meta property="og:image" content="https://github.com/Ethansbox/Ethansbox.github.io/blob/master/images/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/Java%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B%E4%B8%8Ehappen-before-01.png?raw=true">
-<meta property="og:updated_time" content="2019-07-19T12:48:48.534Z">
+<meta property="og:updated_time" content="2019-07-19T14:46:02.326Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="并发编程：Java内存模型与happens-before">
 <meta name="twitter:description" content="一、Java内存模型的抽象结构​        Java虚拟机规范中试图定义一种Java内存模型（Java Memory Model，JMM）来屏蔽掉各种硬件和操作系统的内存访问差异，以实现让Java程序在各种平台下都能达到一致的内存访问效果。在Java中，所有实例域、静态域和数组元素都存储在堆内存中，这些堆内存中的数据称之为共享变量，贡献变量在线程之间共享。而局部变量，方法定义参数和异常处理器参">
@@ -273,7 +273,7 @@ ga('send', 'pageview');
 <ul>
 <li>1、程序顺序规则（Program Order Rule）：一个线程中的每个操作，happens-before于该线程中的任意后续操作。（也就是as-if-serial）</li>
 <li>2、监视器锁规则（Monitor Lock Rule）：对一个锁的解锁，happens-before于随后对这个锁的加锁。</li>
-<li>3、volatile变量规则（Volatile Variable Rule）：对一个volatile域的写，happens-before于任意后续对这个volatile域的读。</li>
+<li>3、volatile变量规则（Volatile Variable Rule）：对一个volatile域的写，happens-before于任意后续对这个volatile域的读。”后续”指的是时间上的后续。</li>
 <li>4、线程启动规则（Thread Start Rule）：如果线程A执行操作ThreadB.start()（启动线程B），那么A线程的ThreadB.start()操作happens-before于线程B中的任意操作。</li>
 <li>5、线程终止规则（Thread Termination Rule）：如果线程A执行操作ThreadB.join()并成功返回，那么线程B中的任意操作happens-before于线程A从ThreadB.join()操作成功返回。</li>
 <li>6、线程中断规则（Thread Interruption Rule）：对线程intererupt()方法的调用先行发生于被中断线程的代码检测到中断事件的发生。</li>
@@ -359,7 +359,7 @@ ga('send', 'pageview');
     <a class="show pull-left" href="/passages/并发编程/并发编程：理解原子操作与CAS/">
         <i class="icon icon-angle-left"></i>
     </a>
-    <a class="hide pull-right" href="/">
+    <a class="show pull-right" href="/passages/并发编程/并发编程：volatile关键字的作用/">
         <i class="icon icon-angle-right"></i>
     </a>
   </div>
